@@ -21,11 +21,9 @@ class CreatePostsTable extends Migration
             $table->string('slug', 100)->unique();
             $table->timestamps();
         
-
             $table->foreign('user_id')
                     ->references('id')
-                    ->on('users')
-                    ->onDelete('SET NULL');
+                    ->on('users');
             });
     }
 
