@@ -30,10 +30,14 @@
                                     <a class="btn btn-primary" href="{{ route('admin.posts.show', $post->slug) }}">View</a>
                                 </td>
                                 <td>
+                                    @if (Auth::user()->id === $post->user_id)
                                     <a class="btn btn-primary" href="{{ route('admin.posts.edit', $post->slug) }}">Edit</a>
+                                    @endif
                                 </td>
                                 <td class="text-center">
+                                    @if (Auth::user()->id === $post->user_id)
                                     <button class="btn btn-danger btn-delete">Delete</button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -24,6 +25,12 @@ class PostController extends Controller
             ],
             'content'   => 'required'
         ];
+    }
+
+    public function myindex() {
+        $posts = Post::where('user_id', Auth::user()->id)->paginate(50);
+
+        return view('admin.posts.index', compact('posts'));
     }
 
     public function index()
@@ -52,12 +59,15 @@ class PostController extends Controller
     }
 
     public function edit(Post $post)
-    {
+    {   
+        if (Auth::user()->id !== $post->user_id) abort(403);
         return view('admin.posts.edit', compact('post'));
     }
 
     public function update(Request $request, Post $post)
-    {
+    {   
+        if (Auth::user()->id !== $post->user_id) abort(403);
+
         $request->validate($this->getValidators($post));
 
         $post->update($request->all());
@@ -66,9 +76,11 @@ class PostController extends Controller
     }
 
     public function destroy(Post $post)
-    {
+    {   
+        if (Auth::user()->id !== $post->user_id) abort(403);
+
         $post->delete();
 
-        return redirect()->route('admin.posts.index');
+        return redirect((url()->previous()));
     }
 }
