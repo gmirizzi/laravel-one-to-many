@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Admin\Controllers;
 
 use App\UserInfo;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class UserInfoController extends Controller
 {
