@@ -38,12 +38,13 @@ class PostController extends Controller
 
     public function index(Request $request)
     {   
+
         $posts = Post::where('id', '>', 0);
 
         if ($request->s) {
             $posts->where('title', 'LIKE', "%$request->s%");
         }
-
+        
         if ($request->category) {
             $posts->where('category_id', $request->category);
         }
@@ -51,8 +52,8 @@ class PostController extends Controller
         if ($request->author) {
             $posts->where('user_id', $request->author);
         }
-
-        $posts = Post::paginate(20);
+        
+        $posts = $posts->paginate(20);
         $categories = Category::all();
         $users = User::all();
         return view('admin.posts.index', [
@@ -73,7 +74,10 @@ class PostController extends Controller
     {
         $request->validate($this->getValidators(null));
 
-        $post = Post::create($request->all());
+        $formData = $request->all() + [
+            'user_id' => Auth::user()->id
+        ];
+        $post = Post::create($formData);
 
         return redirect()->route('admin.posts.show', $post->slug);
     }
