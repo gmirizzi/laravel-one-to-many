@@ -28,6 +28,7 @@ Route::middleware('auth')
         ->name('home');
         Route::post('/slugger', 'HomeController@slugger')->name('slugger');
         Route::get('/posts/my-posts', 'PostController@myindex')->name('posts.myindex');
+        Route::resource('categories', 'CategoryController');
         Route::resource('posts', 'PostController');
     });
 
