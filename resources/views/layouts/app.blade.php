@@ -33,9 +33,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.posts.index') }}">{{ __('Post') }}</a>
-                        </li>
+                        </li> --}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -73,10 +73,11 @@
                 </div>
             </div>
         </nav>
-        <div class="container">
+        <div class="container mt-4">
             <div class="row">
                 <div class="col-2">
                     <div><a href="{{ route('admin.posts.index') }}">All Posts</a></div>
+                    <div><a href="{{ route('admin.posts.myindex') }}">My posts</a></div>      
                     <div><a href="{{ route('admin.posts.create') }}">New Post</a></div>
                     <div><a href="{{ route('admin.categories.index') }}">All Categories</a></div>
                     <div><a href="{{ route('admin.categories.create') }}">New Category</a></div>
