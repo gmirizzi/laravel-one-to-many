@@ -17,7 +17,7 @@
                     </thead>
                     <tbody>
                         @foreach ($categories as $category)
-                            <tr>
+                            <tr data-id="{{ $category->id }}">
                                 <th class="text-center" scope="row">{{ $category->id }}</th>
                                 <td class="text-center">{{ $category->name }}</td>
                                 <td class="text-center">
