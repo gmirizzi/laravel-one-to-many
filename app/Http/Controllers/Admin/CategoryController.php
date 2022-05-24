@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
-{
+{   
+    public $validators = [
+        'name'     => 'required',
+        'description'   => 'max:255'
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +39,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $request->validate($this->validators);
         Category::create($request->all());
         return redirect()->route('admin.categories.index');
     }
@@ -70,7 +75,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
-    {
+    {   
+        $request->validate($this->validators);
         $category->update($request->all());
         return redirect()->route('admin.categories.show', $category);
     }
